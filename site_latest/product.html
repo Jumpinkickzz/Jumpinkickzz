@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Product | JUMPINKICKZZ</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="store.css"></head><body>
+<header><a class="logo" href="index.html">JUMPINKICKZZ</a><nav><a href="index.html">Home</a><a href="catalog.html">Catalog</a><a href="index.html#brands">Brands</a><a href="tops.html">Tops</a><a href="catalog.html#bottoms">Bottoms</a></nav><div class="header-icons"><a href="catalog.html" aria-label="Search">🔍</a><button id="productCartButton" onclick="location.href='checkout.html'" aria-label="Cart">🛒 <span id="productCartCount">0</span></button></div></header>
+<main class="product-detail-wrap"><a class="back-link" href="catalog.html">← Back to catalog</a><section class="product-detail" id="productDetail"></section></main>
+<div id="siteToast" class="site-toast"></div><script src="products.js"></script><script src="store.js"></script><script>
+let currentProduct=null;
+function money(n){return '$'+Number(n).toFixed(2)}
+function renderProduct(){
+ const id=Number(new URLSearchParams(location.search).get('id'))||1; currentProduct=JK_PRODUCTS.find(p=>p.id===id)||JK_PRODUCTS[0];
+ document.title=currentProduct.name+' | JUMPINKICKZZ';
+ const sizes=(currentProduct.category==='SHOES' && (currentProduct.brand==='BALENCIAGA'||currentProduct.brand==='DIOR'))?['36','37','38','39','40','41','42']:(currentProduct.brand==='PURPLE BRAND'||currentProduct.brand==='MIKE AMIRI'?['29','30','31','32','33','34','35','36','37','38','39','40']:['XS','S','M','L','XL','XXL']);
+ const image=currentProduct.img;
+ document.getElementById('productDetail').innerHTML=`<div class="detail-image product-3d-wrap" id="shoeViewer" data-image="${image}" tabindex="0" aria-label="Interactive 3D-style product viewer. Hold left mouse button and drag to rotate."><div class="viewer-badge">↔ DRAG TO ROTATE</div><div class="shoe-stage"><img id="shoe3dImage" src="${image}" alt="${currentProduct.name}"></div><div class="viewer-shadow"></div><span>${currentProduct.brand}</span></div><div class="detail-copy"><div class="eyebrow">${currentProduct.brand}</div><h1>${currentProduct.name}</h1><div class="detail-color">${currentProduct.color}</div><div class="detail-price">${money(currentProduct.price)}</div><p class="detail-description">Premium ${currentProduct.category.toLowerCase()} selection from JUMPINKICKZZ. Choose your size and add it to your cart.</p><label>SIZE<select id="detailSize"><option value="">Select a size</option>${sizes.map(s=>`<option>${s}</option>`).join('')}</select></label><label>QUANTITY<div class="quantity-box"><button onclick="changeDetailQty(-1)">−</button><input id="detailQty" type="number" value="1" min="1" max="20"><button onclick="changeDetailQty(1)">+</button></div></label><button class="primary-cta" onclick="addDetailToCart()">ADD TO CART</button><a class="secondary-cta" href="checkout.html">GO TO CART / CHECKOUT</a><div class="detail-notes"><span>✓ Size selection required</span><span>✓ Cart saves on this device</span><span>✓ Review your order before checkout</span></div></div>`;
+ updateProductCartCount();
+}
+function changeDetailQty(d){const el=document.getElementById('detailQty');el.value=Math.max(1,Math.min(20,Number(el.value||1)+d))}
+function addDetailToCart(){const size=document.getElementById('detailSize').value;if(!size){showToast('Please select a size first.');return}const qty=Math.max(1,Math.min(20,Number(document.getElementById('detailQty').value||1)));addToCart(currentProduct,size,qty);showToast('✓ Added to cart');setTimeout(()=>location.href='checkout.html',450)}
+function initShoeViewer(){
+ const viewer=document.getElementById('shoeViewer'); const img=document.getElementById('shoe3dImage'); if(!viewer||!img)return;
+ let dragging=false,lastX=0,rotation=0;
+ const update=(x)=>{ rotation=Math.max(-34,Math.min(34,rotation+(x-lastX)*0.42)); lastX=x; const depth=Math.abs(rotation)/34; const scale=1+depth*0.025; img.style.transform=`perspective(900px) rotateY(${rotation}deg) rotateX(${rotation*-0.08}deg) scale(${scale})`; img.style.filter=`drop-shadow(${rotation*0.18}px 22px 20px rgba(0,0,0,.42))`; viewer.style.setProperty('--shine', `${50+rotation*1.2}%`); };
+ viewer.addEventListener('pointerdown',e=>{if(e.button!==0)return; dragging=true;lastX=e.clientX;viewer.setPointerCapture(e.pointerId);viewer.classList.add('is-dragging');});
+ viewer.addEventListener('pointermove',e=>{if(dragging)update(e.clientX);});
+ viewer.addEventListener('pointerup',()=>{dragging=false;viewer.classList.remove('is-dragging');});
+ viewer.addEventListener('pointercancel',()=>{dragging=false;viewer.classList.remove('is-dragging');});
+ viewer.addEventListener('pointerleave',()=>{if(dragging){dragging=false;viewer.classList.remove('is-dragging');}});
+ viewer.addEventListener('wheel',e=>{e.preventDefault(); const fakeX=lastX||0; rotation=Math.max(-34,Math.min(34,rotation-e.deltaY*0.035)); lastX=fakeX; img.style.transform=`perspective(900px) rotateY(${rotation}deg) rotateX(${rotation*-0.08}deg) scale(${1+Math.abs(rotation)/34*0.025})`;});
+ viewer.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){rotation=Math.max(-34,rotation-5)} if(e.key==='ArrowRight'){rotation=Math.min(34,rotation+5)} img.style.transform=`perspective(900px) rotateY(${rotation}deg) rotateX(${rotation*-0.08}deg) scale(${1+Math.abs(rotation)/34*0.025})`;});
+}
+
+document.addEventListener('DOMContentLoaded',()=>{renderProduct();setTimeout(initShoeViewer,0)});
+</script></body></html>

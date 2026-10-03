@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hoodies | JUMPINKICKZZ</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="logo">JUMPINKICKZZ</div><nav><a href="index.html">Home</a><a href="catalog.html">Catalog</a><a href="index.html#brands">Brands</a><a href="tops.html">Tops</a><a href="catalog.html#bottoms">Bottoms</a><a href="catalog.html">Accessories</a></nav><div class="header-icons"><a href="tops.html" style="text-decoration:none;color:#111;font-weight:900">←</a></div></header>
+<section class="hero" style="min-height:35vh"><div><p class="eyebrow">TOPS</p><h1>HOODIES</h1><p>Shop our current hoodie collection.</p></div></section>
+<main class="products"><div class="section-title"><p class="eyebrow">CURRENT COLLECTION</p><h2>Hoodies</h2><p>Explore the hoodies currently available.</p></div><div class="product-grid">
+<div class="product-card"><div class="product-image"><img src="images/sp5der_black_pink.jpg" alt="Never Mind the Punk Sp5der Hoodie"></div><div class="product-info"><div class="brand-name">SP5DER</div><h3>Never Mind the Punk Sp5der Hoodie</h3><p>$75.00</p><a class="quick-add" href="sp5der.html" style="display:block;text-align:center;text-decoration:none;box-sizing:border-box">VIEW HOODIES →</a></div></div>
+<div class="product-card"><div class="product-image"><img src="images/sp5der_blue.jpg" alt="Sp5der Hoodie TC Blue"></div><div class="product-info"><div class="brand-name">SP5DER</div><h3>Sp5der Hoodie “TC Blue”</h3><p>$75.00</p><a class="quick-add" href="sp5der.html" style="display:block;text-align:center;text-decoration:none;box-sizing:border-box">VIEW HOODIES →</a></div></div>
+<div class="product-card"><div class="product-image"><img src="images/sp5der_skyblue.jpg" alt="Sp5der Web Hoodie Sky Blue"></div><div class="product-info"><div class="brand-name">SP5DER</div><h3>Sp5der Web Hoodie “Sky Blue”</h3><p>$75.00</p><a class="quick-add" href="sp5der.html" style="display:block;text-align:center;text-decoration:none;box-sizing:border-box">VIEW HOODIES →</a></div></div>
+</div><div style="text-align:center;margin-top:35px"><a href="tops.html" style="color:#111;font-weight:900;text-decoration:none">← Back to Tops</a></div></main>
+<footer><h2>JUMPINKICKZZ</h2><p>Fresh kicks. Fresh fits.</p><p>© 2026 Jumpinkickzz</p></footer>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("page-transition");
+
+  document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", e => {
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto:")) return;
+      e.preventDefault();
+      document.body.style.opacity = "0";
+      document.body.style.transform = "translateY(6px)";
+      setTimeout(() => { window.location.href = href; }, 180);
+    });
+  });
+
+  document.addEventListener("click", e => {
+    const target = e.target.closest("a, button, .filter-btn, .product-card");
+    if (!target) return;
+    const ripple = document.createElement("span");
+    ripple.className = "click-ripple";
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top = e.clientY + "px";
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 520);
+  });
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  // Make all placeholder nav links visibly respond instead of silently doing nothing.
+  document.querySelectorAll('a[href="#"]').forEach(link=>link.addEventListener('click',e=>{
+    e.preventDefault();
+    const label=(link.textContent||'This section').trim();
+    const t=document.createElement('div'); t.className='toast-pop'; t.textContent=label+' is coming soon';
+    document.body.appendChild(t); requestAnimationFrame(()=>t.classList.add('show'));
+    setTimeout(()=>t.remove(),2200);
+  }));
+
+  // Extra click feedback without hijacking normal button behavior.
+  document.addEventListener('click',e=>{
+    const target=e.target.closest('button,a,.product-card,.catalog-card');
+    if(!target) return;
+    const wave=document.createElement('span'); wave.className='ripple-wave';
+    wave.style.left=e.clientX+'px'; wave.style.top=e.clientY+'px';
+    document.body.appendChild(wave); setTimeout(()=>wave.remove(),600);
+  });
+
+  // Gentle pointer tilt on cards for a more responsive feel.
+  document.querySelectorAll('.product-card,.catalog-card,.brand-card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(900px) rotateX(${(-y*2.2).toFixed(2)}deg) rotateY(${(x*2.2).toFixed(2)}deg) translateY(-7px)`;
+    });
+    card.addEventListener('pointerleave',()=>card.style.transform='');
+  });
+});
+</script>
+
+</body></html>
