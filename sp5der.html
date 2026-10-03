@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JUMPINKICKZZ — SP5DER</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
+/* Product upgrade — keeps the original page structure */
+.product-grid { align-items: stretch; }
+.animated-product {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transform: translateY(0);
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+    outline: none;
+}
+.animated-product::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.55), transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .7s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+.animated-product:hover {
+    transform: translateY(-9px) scale(1.015);
+    box-shadow: 0 18px 40px rgba(0,0,0,.16);
+}
+.animated-product:hover::before { transform: translateX(120%); }
+.product-image {
+    position: relative;
+    overflow: hidden;
+    background: #f2f2f2;
+    min-height: 230px;
+}
+.product-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 230px;
+    object-fit: cover;
+    display: block;
+    transition: transform .55s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+}
+.animated-product:hover .product-image img {
+    transform: scale(1.08);
+    filter: saturate(1.08) contrast(1.03);
+}
+
+.product-image .primary-view {
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+}
+.product-image .hover-view {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity .35s ease, transform .55s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+}
+.animated-product:hover .product-image .primary-view {
+    opacity: 0;
+}
+.animated-product:hover .product-image .hover-view {
+    opacity: 1;
+    transform: scale(1.08);
+    filter: saturate(1.08) contrast(1.03);
+}
+
+.image-badge {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    padding: 6px 9px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.82);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    z-index: 3;
+}
+.product-info { padding: 15px; }
+.brand-name {
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+.product-info h3 { margin: 0 0 6px; }
+.product-info p { font-weight: 800; margin: 0 0 12px; }
+.quick-add {
+    width: 100%;
+    border: 1px solid #111;
+    background: #111;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: transform .2s ease, background .2s ease;
+}
+.quick-add:hover { transform: translateY(-2px); background: #333; }
+
+.shop-modal {
+    position: fixed; inset: 0; z-index: 1000;
+    display: none; align-items: center; justify-content: center;
+    padding: 18px; background: rgba(0,0,0,.65);
+    backdrop-filter: blur(7px);
+    animation: fadeIn .2s ease;
+}
+.shop-modal.open { display: flex; }
+.shop-modal-box {
+    width: min(720px, 100%);
+    max-height: 92vh; overflow: auto;
+    background: #fff; border-radius: 20px;
+    box-shadow: 0 30px 90px rgba(0,0,0,.35);
+    animation: modalUp .35s cubic-bezier(.2,.8,.2,1);
+}
+.modal-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.modal-photo { min-height: 380px; background: #f2f2f2; overflow: hidden; }
+.modal-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.modal-details { padding: 28px; }
+.modal-brand { font-weight:900; letter-spacing:2px; font-size:12px; }
+.modal-details h2 { margin: 7px 0; }
+.modal-price { font-size: 20px; font-weight:900; margin: 10px 0 22px; }
+.option-label { display:block; font-size:12px; font-weight:800; margin:15px 0 7px; letter-spacing:.7px; }
+.option-select, .quantity-input {
+    width:100%; padding:12px; border:1px solid #ccc;
+    border-radius:9px; font-size:15px; background:#fff;
+}
+.qty-controls { display:flex; gap:8px; }
+.qty-controls button {
+    width:44px; border:1px solid #ccc; border-radius:9px;
+    background:#fff; cursor:pointer; font-size:20px;
+}
+.add-cart {
+    width:100%; margin-top:20px; padding:14px;
+    border:0; border-radius:10px; background:#111; color:#fff;
+    font-weight:900; cursor:pointer; transition:transform .2s ease, opacity .2s ease;
+}
+.add-cart:hover { transform:translateY(-2px); opacity:.9; }
+.modal-close {
+    position:absolute; right:24px; top:18px; z-index:5;
+    border:0; width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,.92); cursor:pointer; font-size:22px;
+}
+.cart-drawer {
+    position:fixed; inset:0; z-index:1100;
+    display:none; background:rgba(0,0,0,.55);
+    backdrop-filter:blur(4px);
+}
+.cart-drawer.open { display:block; }
+.cart-panel {
+    position:absolute; right:0; top:0; height:100%;
+    width:min(440px,100%); background:#fff;
+    padding:24px; display:flex; flex-direction:column;
+    animation: slideCart .3s cubic-bezier(.2,.8,.2,1);
+}
+.cart-top { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ddd; padding-bottom:14px; }
+.cart-close { border:0; background:none; font-size:28px; cursor:pointer; }
+.cart-items { flex:1; overflow:auto; padding:8px 0; }
+.cart-row { padding:15px 0; border-bottom:1px solid #eee; }
+.cart-row-title { font-weight:900; margin-bottom:5px; }
+.cart-row-meta { color:#666; font-size:13px; }
+.cart-row-actions { display:flex; justify-content:space-between; align-items:center; margin-top:8px; }
+.remove-item { border:0; background:none; color:#b00020; cursor:pointer; padding:0; }
+.cart-total { border-top:1px solid #ddd; padding-top:16px; font-size:19px; font-weight:900; }
+.checkout-btn {
+    width:100%; margin-top:14px; padding:14px; border:0; border-radius:10px;
+    background:#111; color:#fff; font-weight:900; cursor:pointer;
+}
+.cart-pop {
+    animation: cartPop .45s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes modalUp { from{opacity:0; transform:translateY(25px) scale(.97)} to{opacity:1; transform:none} }
+@keyframes slideCart { from{transform:translateX(100%)} to{transform:none} }
+@keyframes cartPop { 0%{transform:scale(1)} 35%{transform:scale(1.25)} 100%{transform:scale(1)} }
+@media(max-width:700px){
+    .modal-grid { grid-template-columns:1fr; }
+    .modal-photo { min-height:260px; max-height:330px; }
+}
+
+/* Working search bar */
+.search-panel {
+    position: absolute;
+    top: 100%;
+    right: 70px;
+    width: min(360px, calc(100vw - 30px));
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 14px 35px rgba(0,0,0,.16);
+    display: none;
+    z-index: 1000;
+}
+.search-panel.open { display: block; animation: searchDrop .2s ease; }
+.search-panel input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    padding: 11px 13px;
+    font-size: 15px;
+    outline: none;
+}
+.search-panel input:focus { border-color: #111; }
+.search-results {
+    margin-top: 8px;
+    max-height: 330px;
+    overflow-y: auto;
+}
+.search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px;
+    margin: 5px 0;
+    border: 0;
+    border-radius: 10px;
+    background: #f7f7f7;
+    cursor: pointer;
+    text-align: left;
+    transition: transform .15s ease, background .15s ease;
+}
+.search-result-item:hover { background: #ededed; transform: translateY(-1px); }
+.search-result-item img { width: 58px; height: 58px; object-fit: contain; border-radius: 8px; background: #fff; flex: 0 0 58px; }
+.search-result-info { min-width: 0; }
+.search-result-name { font-weight: 800; color: #111; font-size: 13px; line-height: 1.2; }
+.search-result-meta { color: #666; font-size: 11px; margin-top: 3px; }
+.search-result-price { font-weight: 800; color: #111; margin-left: auto; white-space: nowrap; font-size: 12px; }
+.search-count { padding: 7px 4px 3px; color: #666; font-size: 11px; font-weight: 700; }
+.search-highlight { animation: searchHighlight 1.2s ease; }
+@keyframes searchHighlight { 0%,100% { box-shadow: 0 0 0 rgba(0,0,0,0); } 35% { box-shadow: 0 0 0 5px rgba(0,0,0,.18); } }
+.search-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 45px 20px;
+    color: #666;
+    font-weight: 700;
+}
+@keyframes searchDrop { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+@media(max-width:700px){ .search-panel { right: 10px; } }
+
+
+/* Super-cool add-to-cart animation */
+.fly-to-cart {
+  position: fixed; z-index: 3000; pointer-events:none; object-fit:contain;
+  width:120px; height:120px; border-radius:18px; background:#fff;
+  box-shadow:0 18px 45px rgba(0,0,0,.28);
+  transition: transform .8s cubic-bezier(.18,.85,.25,1), opacity .8s ease;
+}
+.cart-burst { position:fixed; z-index:3001; pointer-events:none; }
+.cart-spark { position:absolute; width:9px; height:9px; border-radius:50%; background:#111; animation:sparkFly .65s ease-out forwards; }
+.cart-spark:nth-child(1){--dx:42px;--dy:-38px}.cart-spark:nth-child(2){--dx:-45px;--dy:-28px}.cart-spark:nth-child(3){--dx:50px;--dy:20px}.cart-spark:nth-child(4){--dx:-48px;--dy:22px}.cart-spark:nth-child(5){--dx:15px;--dy:-52px}.cart-spark:nth-child(6){--dx:-12px;--dy:52px}
+@keyframes sparkFly { from{transform:translate(0,0) scale(1);opacity:1} to{transform:translate(var(--dx),var(--dy)) scale(.1);opacity:0} }
+.cart-added-toast {
+  position:fixed; left:50%; top:24px; z-index:3002; transform:translate(-50%,-20px) scale(.9);
+  background:#111; color:#fff; padding:13px 20px; border-radius:999px;
+  font-weight:900; letter-spacing:.4px; box-shadow:0 14px 35px rgba(0,0,0,.25);
+  opacity:0; pointer-events:none; transition:.35s ease;
+}
+.cart-added-toast.show { opacity:1; transform:translate(-50%,0) scale(1); }
+
+
+/* JUMPINKICKZZ cart refresh */
+.cart-panel{background:linear-gradient(180deg,#fff 0%,#fafafa 100%);box-shadow:-20px 0 70px rgba(0,0,0,.18);border-left:1px solid #eee}
+.cart-top{padding:6px 0 18px}.cart-kicker{font-size:10px;letter-spacing:.2em;font-weight:900;color:#888}.cart-top h2{margin:4px 0 0;font-size:28px}.cart-close{width:40px;height:40px;border-radius:50%;transition:transform .2s,background .2s}.cart-close:hover{background:#eee;transform:rotate(90deg) scale(1.08)}
+.cart-row{display:grid;grid-template-columns:72px 1fr;gap:13px;padding:16px 4px;border-bottom:1px solid #e9e9e9;animation:cartRowIn .35s ease both}.cart-thumb{width:72px;height:82px;border-radius:12px;object-fit:contain;background:#f1f1f1}.cart-row-title{font-size:14px}.cart-row-meta{margin-top:4px}.cart-row-actions{gap:8px;align-items:center}.cart-qty{display:flex;align-items:center;border:1px solid #ddd;border-radius:10px;overflow:hidden;background:#fff}.cart-qty button{width:30px;height:30px;border:0;background:#fff;font-weight:900;cursor:pointer;transition:background .15s,transform .15s}.cart-qty button:hover{background:#f0f0f0}.cart-qty button:active{transform:scale(.82)}.cart-qty span{min-width:25px;text-align:center;font-size:12px;font-weight:800}.remove-item{font-size:11px;text-decoration:underline}.cart-total{font-size:16px;padding-top:18px}.checkout-btn{position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}.checkout-btn:hover{transform:translateY(-3px);box-shadow:0 12px 25px rgba(0,0,0,.2)}.checkout-btn:active{transform:scale(.97)}.checkout-btn::after{content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);transition:left .55s}.checkout-btn:hover::after{left:140%}@keyframes cartRowIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}@keyframes cartRowRemove{to{opacity:0;transform:translateX(80px);max-height:0;padding:0;margin:0}}.cart-row-remove{animation:cartRowRemove .22s ease forwards}
+/* universal click feedback */
+button,.shop-button,.catalog-filter,.brand-tile,.quick-add,.add-cart,.checkout-btn{will-change:transform}button:active,.shop-button:active,.brand-tile:active,.quick-add:active,.add-cart:active{transform:scale(.96)}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">JUMPINKICKZZ</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="catalog.html">Catalog</a>
+<a href="#products">Hoodies</a>
+<a href="tops.html">Tops</a>
+<a href="catalog.html#bottoms">Bottoms</a>
+<a href="#">Accessories</a>
+</nav>
+<div class="header-icons" style="position:relative;">
+<button aria-label="Search products" id="searchButton" onclick="toggleSearch()" type="button">🔍</button>
+<button id="cartButton" onclick="openCart()" title="Shopping cart" type="button">🛒 <span id="cartCount">0</span></button>
+<div class="search-panel" id="searchPanel">
+<input autocomplete="off" id="searchInput" oninput="searchProducts(this.value)" placeholder="Search hoodies..." type="search"/>
+<div class="search-results" id="searchResults"></div>
+</div>
+</div>
+</header>
+<section class="hero" style="min-height:34vh;">
+<div class="hero-content">
+<p>JUMPINKICKZZ</p>
+<h1>SP5DER</h1>
+<p>All SP5DER Hoodies</p>
+</div>
+</section>
+<section class="products">
+<div style="display:flex;align-items:end;justify-content:space-between;gap:20px;max-width:1200px;margin:0 auto 22px;padding:0 20px;">
+<div><div class="brand-name" style="font-size:18px;">SP5DER</div><h2 style="margin:4px 0 0;">All SP5DER Hoodies</h2></div>
+<a href="index.html" style="font-weight:800;color:#111;text-decoration:none;">← Back Home</a>
+</div>
+<div class="product-grid">
+<div class="product-card animated-product searchable-product" data-product-index="0" onclick="openProduct(0)" onkeydown="if(event.key==='Enter')openProduct(0)" tabindex="0">
+<div class="product-image">
+<img alt="Never Mind the Punk Sp5der Hoodie" class="primary-view" src="images/sp5der_black_pink.jpg"/>
+<img alt="" aria-hidden="true" class="hover-view" src="images/sp5der_black_pink.jpg"/>
+<div class="image-badge">HOVER TO PREVIEW</div>
+</div>
+<div class="product-info">
+<div class="brand-name">SP5DER</div>
+<h3>Never Mind the Punk Sp5der Hoodie</h3>
+<p>$75.00</p>
+<button class="quick-add" onclick="event.stopPropagation();openProduct(0)" type="button">SELECT OPTIONS</button>
+</div>
+</div>
+<div class="product-card animated-product searchable-product" data-product-index="1" onclick="openProduct(1)" onkeydown="if(event.key==='Enter')openProduct(1)" tabindex="0">
+<div class="product-image">
+<img alt="Sp5der TC Hoodie" class="primary-view" src="images/sp5der_blue.jpg"/>
+<img alt="" aria-hidden="true" class="hover-view" src="images/sp5der_blue.jpg"/>
+<div class="image-badge">HOVER TO PREVIEW</div>
+</div>
+<div class="product-info">
+<div class="brand-name">SP5DER</div>
+<h3>Sp5der Hoodie “TC Blue”</h3>
+<p>$75.00</p>
+<button class="quick-add" onclick="event.stopPropagation();openProduct(1)" type="button">SELECT OPTIONS</button>
+</div>
+</div>
+<div class="product-card animated-product searchable-product" data-product-index="2" onclick="openProduct(2)" onkeydown="if(event.key==='Enter')openProduct(2)" tabindex="0">
+<div class="product-image">
+<img alt="Sp5der Web Hoodie" class="primary-view" src="images/sp5der_skyblue.jpg"/>
+<img alt="" aria-hidden="true" class="hover-view" src="images/sp5der_skyblue.jpg"/>
+<div class="image-badge">HOVER TO PREVIEW</div>
+</div>
+<div class="product-info">
+<div class="brand-name">SP5DER</div>
+<h3>Sp5der Web Hoodie “Sky Blue”</h3>
+<p>$75.00</p>
+<button class="quick-add" onclick="event.stopPropagation();openProduct(2)" type="button">SELECT OPTIONS</button>
+</div>
+</div>
+
+
+<div class="product-card animated-product searchable-product" data-product-index="3" onclick="openProduct(5)" onkeydown="if(event.key==='Enter')openProduct(5)" tabindex="0">
+<div class="product-image">
+<img alt="Sp5der Punk V2 Rhinestone Hoodie — Bright Green" class="primary-view" src="images/sp5der_bright_green.jpg"/>
+<img alt="" aria-hidden="true" class="hover-view" src="images/sp5der_bright_green.jpg"/>
+<div class="image-badge">HOVER TO PREVIEW</div>
+</div>
+<div class="product-info">
+<div class="brand-name">SP5DER</div>
+<h3>Sp5der Punk V2 Rhinestone Hoodie “Bright Green”</h3>
+<p>$75.00</p>
+<button class="quick-add" onclick="event.stopPropagation();openProduct(5)" type="button">SELECT OPTIONS</button>
+</div>
+</div>
+<div class="product-card animated-product searchable-product" data-product-index="4" onclick="openProduct(6)" onkeydown="if(event.key==='Enter')openProduct(6)" tabindex="0">
+<div class="product-image">
+<img alt="World 555 Hoodie — Red" class="primary-view" src="images/sp5der_red.jpg"/>
+<img alt="" aria-hidden="true" class="hover-view" src="images/sp5der_red.jpg"/>
+<div class="image-badge">HOVER TO PREVIEW</div>
+</div>
+<div class="product-info">
+<div class="brand-name">SP5DER</div>
+<h3>World 555 Hoodie — Red</h3>
+<p>$75.00</p>
+<button class="quick-add" onclick="event.stopPropagation();openProduct(6)" type="button">SELECT OPTIONS</button>
+</div>
+</div>
+</div>
+</section>
+<footer>
+<h2>JUMPINKICKZZ</h2>
+<p>Fresh kicks. Fresh fits.</p>
+<p>© 2026 Jumpinkickzz</p>
+</footer>
+<div class="shop-modal" id="shopModal" onclick="if(event.target===this)closeProduct()">
+<div class="shop-modal-box">
+<button aria-label="Close" class="modal-close" onclick="closeProduct()">×</button>
+<div class="modal-grid">
+<div class="modal-photo"><img alt="" id="modalPhoto" src=""/></div>
+<div class="modal-details">
+<div class="modal-brand">SP5DER</div>
+<h2 id="modalName"></h2>
+<div id="modalColor" style="color:#666;font-size:13px"></div>
+<div class="modal-price" id="modalPrice"></div>
+<label class="option-label" for="shopSize">SIZE</label>
+<select class="option-select" id="shopSize">
+<option value="">Select size</option>
+<option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
+</select>
+<label class="option-label">QUANTITY</label>
+<div class="qty-controls">
+<button onclick="changeQty(-1)" type="button">−</button>
+<input class="quantity-input" id="shopQty" max="20" min="1" type="number" value="1"/>
+<button onclick="changeQty(1)" type="button">+</button>
+</div>
+<button class="add-cart" onclick="addSelectedToCart()">ADD TO CART</button>
+</div>
+</div>
+</div>
+</div>
+<div class="cart-drawer" id="cartDrawer" onclick="if(event.target===this)closeCart()">
+<div class="cart-panel">
+<div class="cart-top"><h2>Your Cart</h2><button class="cart-close" onclick="closeCart()">×</button></div>
+<div class="cart-items" id="cartItems"></div>
+<div class="cart-total" id="cartTotal">Total: $0.00</div>
+<button class="checkout-btn" onclick="checkout()">CHECKOUT</button>
+</div>
+</div>
+<script>
+const shopProducts = [
+  {"name":"Never Mind the Punk Sp5der Hoodie","color":"Black / Pink","price":75,"img":"images/sp5der_black_pink.jpg"},
+  {"name":"Sp5der Hoodie \"TC Blue\"","color":"Blue / Yellow","price":75,"img":"images/sp5der_blue.jpg"},
+  {"name":"Sp5der Web Hoodie \"Sky Blue\"","color":"Sky Blue / White","price":75,"img":"images/sp5der_skyblue.jpg"},
+  {"name":"Sp5der Punk V2 Rhinestone Hoodie “Bright Green”","color":"Bright Green / Black / White","price":75,"img":"images/sp5der_bright_green.jpg"},
+  {"name":"World 555 Hoodie – Red","color":"Red","price":75,"img":"images/sp5der_red.jpg"}
+];
+let shopCart = JSON.parse(localStorage.getItem("jumpinkickzzCart") || "[]");
+let selectedProduct = null;
+
+function money(n) {
+  return new Intl.NumberFormat("en-US", {style:"currency", currency:"USD"}).format(n);
+}
+function toggleSearch() {
+  const panel = document.getElementById("searchPanel");
+  const input = document.getElementById("searchInput");
+  panel.classList.toggle("open");
+  if (panel.classList.contains("open")) {
+    input.focus();
+  } else {
+    input.value = "";
+    searchProducts("");
+  }
+}
+function searchProducts(query) {
+  const q = query.trim().toLowerCase();
+  const cards = document.querySelectorAll(".searchable-product");
+  const results = document.getElementById("searchResults");
+  let matches = [];
+
+  cards.forEach(card => {
+    const index = Number(card.dataset.productIndex);
+    const product = shopProducts[index];
+    const text = `${product.name} ${product.color} SP5DER Hoodie`.toLowerCase();
+    const show = !q || text.includes(q);
+    card.style.display = show ? "" : "none";
+    if (show && q) matches.push({ product, index });
+  });
+
+  // Show matching shoes directly under the search bar so the searched shoe visibly comes up.
+  if (q) {
+    results.innerHTML = `<div class="search-count">${matches.length} product${matches.length === 1 ? "" : "s"} found</div>` +
+      matches.map(({product, index}) => `
+        <button class="search-result-item" type="button" onclick="selectSearchResult(${index})">
+          <img src="${product.img}" alt="${product.name}">
+          <span class="search-result-info">
+            <span class="search-result-name">${product.name}</span>
+            <span class="search-result-meta">${product.color}</span>
+          </span>
+          <span class="search-result-price">$${Number(product.price).toFixed(2)}</span>
+        </button>
+      `).join("");
+  } else {
+    results.innerHTML = "";
+  }
+
+  const grid = document.querySelector(".product-grid");
+  let empty = document.getElementById("searchEmpty");
+  if (q && matches.length === 0) {
+    if (!empty) {
+      empty = document.createElement("div");
+      empty.id = "searchEmpty";
+      empty.className = "search-empty";
+      grid.appendChild(empty);
+    }
+    empty.textContent = `No products found for “${query}”.`;
+  } else if (empty) {
+    empty.remove();
+  }
+}
+
+function selectSearchResult(index) {
+  const card = document.querySelector(`.searchable-product[data-product-index="${index}"]`);
+  if (card) {
+    card.style.display = "";
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+    card.classList.add("search-highlight");
+    setTimeout(() => card.classList.remove("search-highlight"), 1200);
+  }
+  openProduct(index);
+  const panel = document.getElementById("searchPanel");
+  const input = document.getElementById("searchInput");
+  panel.classList.remove("open");
+  input.value = "";
+  searchProducts("");
+}
+
+function openProduct(index) {
+  const product = shopProducts[index];
+  if (!product) return;
+  // Product cards now open the full product page so size selection and checkout work consistently.
+  const params = new URLSearchParams({name: product.name, color: product.color, price: product.price});
+  const target = Array.isArray(window.JK_PRODUCTS) ? window.JK_PRODUCTS.find(p => p.name===product.name && p.color===product.color) : null;
+  if (target) params.set('id', target.id);
+  else params.set('id', 1);
+  window.location.href = 'product.html?' + params.toString();
+}
+function closeProduct() {
+  document.getElementById("shopModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+function changeQty(delta) {
+  const el = document.getElementById("shopQty");
+  el.value = Math.max(1, Math.min(20, Number(el.value || 1) + delta));
+}
+function addSelectedToCart() {
+  const size = document.getElementById("shopSize").value;
+  const quantity = Math.max(1, Math.min(20, Number(document.getElementById("shopQty").value || 1)));
+  if (!size) {
+    alert("Please select a size.");
+    return;
+  }
+
+  const key = selectedProduct.name + "|" + size;
+  const existing = shopCart.find(x => x.key === key);
+  if (existing) { existing.quantity += quantity; existing.img = existing.img || selectedProduct.img; }
+  else shopCart.push({
+    key, name:selectedProduct.name, color:selectedProduct.color,
+    size, quantity, price:selectedProduct.price, img:selectedProduct.img
+  });
+  saveCart();
+
+  // Capture the shoe and fly it into the cart for a satisfying add animation.
+  const source = document.getElementById("modalPhoto");
+  const target = document.getElementById("cartButton");
+  if (source && target) {
+    const a = source.getBoundingClientRect();
+    const b = target.getBoundingClientRect();
+    const flyer = source.cloneNode(true);
+    flyer.className = "fly-to-cart";
+    flyer.style.left = a.left + "px";
+    flyer.style.top = a.top + "px";
+    document.body.appendChild(flyer);
+    requestAnimationFrame(() => {
+      flyer.style.transform = `translate(${b.left - a.left + b.width/2 - a.width/2}px, ${b.top - a.top + b.height/2 - a.height/2}px) scale(.18) rotate(8deg)`;
+      flyer.style.opacity = "0.15";
+    });
+    setTimeout(() => flyer.remove(), 850);
+    setTimeout(() => makeCartBurst(b), 650);
+  }
+
+  closeProduct();
+  const cartButton = document.getElementById("cartButton");
+  if (cartButton) {
+    cartButton.classList.remove("cart-pop");
+    void cartButton.offsetWidth;
+    cartButton.classList.add("cart-pop");
+  }
+  showAddedToast(quantity > 1 ? `${quantity} pairs added to cart!` : "Added to cart!");
+  setTimeout(openCart, 700);
+}
+
+function makeCartBurst(rect) {
+  const burst = document.createElement("div");
+  burst.className = "cart-burst";
+  burst.style.left = (rect.left + rect.width/2) + "px";
+  burst.style.top = (rect.top + rect.height/2) + "px";
+  burst.innerHTML = "<i class='cart-spark'></i>".repeat(6);
+  document.body.appendChild(burst);
+  setTimeout(() => burst.remove(), 800);
+}
+
+function showAddedToast(message) {
+  let toast = document.getElementById("cartAddedToast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "cartAddedToast";
+    toast.className = "cart-added-toast";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = "✓ " + message;
+  toast.classList.remove("show");
+  void toast.offsetWidth;
+  toast.classList.add("show");
+  clearTimeout(window.__cartToastTimer);
+  window.__cartToastTimer = setTimeout(() => toast.classList.remove("show"), 1500);
+}
+function saveCart() {
+  localStorage.setItem("jumpinkickzzCart", JSON.stringify(shopCart));
+  renderCart();
+}
+function renderCart() {
+  const count = shopCart.reduce((s,x)=>s+x.quantity,0);
+  const badge = document.getElementById("cartCount");
+  if (badge) badge.textContent = count;
+  const list = document.getElementById("cartItems");
+  if (!list) return;
+  if (!shopCart.length) {
+    list.innerHTML = '<div class="cart-empty"><div style="font-size:34px">🛒</div><strong>Your cart is empty</strong><div style="color:#777;font-size:13px;margin-top:5px">Add something you like and it will appear here.</div></div>';
+  } else {
+    list.innerHTML = shopCart.map((x,i) => `
+      <div class="cart-row">
+        <img class="cart-thumb" src="${x.img || ''}" alt="${x.name}">
+        <div>
+          <div class="cart-row-title">${x.name}</div>
+          <div class="cart-row-meta">${x.color} · Size ${x.size}</div>
+          <div class="cart-row-actions">
+            <div class="cart-qty"><button type="button" onclick="changeCartQty(${i},-1)">−</button><span>${x.quantity}</span><button type="button" onclick="changeCartQty(${i},1)">+</button></div>
+            <strong>${money(x.price * x.quantity)}</strong>
+            <button class="remove-item" type="button" onclick="removeCartItem(${i})">Remove</button>
+          </div>
+        </div>
+      </div>`).join("");
+  }
+  const total = shopCart.reduce((s,x)=>s+x.price*x.quantity,0);
+  const totalEl=document.getElementById("cartTotal"); if(totalEl) totalEl.textContent = money(total);
+}
+function changeCartQty(i,delta) {
+  if (!shopCart[i]) return;
+  shopCart[i].quantity=Math.max(1,Math.min(20,shopCart[i].quantity+delta));
+  saveCart();
+  const row=document.querySelectorAll('.cart-row')[i];
+  if(row){row.classList.remove('cart-row-pop');void row.offsetWidth;row.classList.add('cart-row-pop');}
+}
+function removeCartItem(i) {
+  const row=document.querySelectorAll('.cart-row')[i];
+  if(row){row.classList.add('cart-row-remove');setTimeout(()=>{shopCart.splice(i,1);saveCart();},220);}
+  else { shopCart.splice(i,1); saveCart(); }
+}
+function openCart() {
+  document.getElementById("cartDrawer").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeCart() {
+  document.getElementById("cartDrawer").classList.remove("open");
+  document.body.style.overflow = "";
+}
+function checkout() {
+  if (!shopCart.length) { alert('Your cart is empty.'); return; }
+  window.location.href = 'checkout.html';
+}
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") { closeProduct(); closeCart(); }
+});
+document.addEventListener("DOMContentLoaded", () => {
+  renderCart();
+});
+document.addEventListener("click", e => {
+  const panel = document.getElementById("searchPanel");
+  const button = document.getElementById("searchButton");
+  if (panel && panel.classList.contains("open") && !panel.contains(e.target) && e.target !== button) {
+    panel.classList.remove("open");
+  }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("page-transition");
+
+  document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", e => {
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto:")) return;
+      e.preventDefault();
+      document.body.style.opacity = "0";
+      document.body.style.transform = "translateY(6px)";
+      setTimeout(() => { window.location.href = href; }, 180);
+    });
+  });
+
+  document.addEventListener("click", e => {
+    const target = e.target.closest("a, button, .filter-btn, .product-card");
+    if (!target) return;
+    const ripple = document.createElement("span");
+    ripple.className = "click-ripple";
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top = e.clientY + "px";
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 520);
+  });
+});
+</script>
+
+<script src="products.js"></script></body>
+</html>

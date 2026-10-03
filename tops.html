@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tops | JUMPINKICKZZ</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.tops-hero{min-height:42vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#111,#2b2b2b);color:#fff;padding:40px 20px}.tops-hero h1{font-size:58px;margin:8px 0}.tops-hero p{color:#ddd;margin:0}.tops-wrap{max-width:1100px;margin:auto;padding:65px 20px 90px}.tops-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.tops-card{min-height:330px;border:1px solid #e5e5e5;border-radius:22px;background:#fff;text-decoration:none;color:#111;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 12px 35px rgba(0,0,0,.07);transition:transform .25s,box-shadow .25s}.tops-card:hover{transform:translateY(-7px);box-shadow:0 22px 50px rgba(0,0,0,.13)}.tops-card .icon{font-size:58px;margin-bottom:18px}.tops-card h2{font-size:30px;margin:0 0 9px}.tops-card p{color:#666;margin:0}.tops-note{text-align:center;color:#777;margin:32px 0 0;font-size:13px}@media(max-width:700px){.tops-grid{grid-template-columns:1fr}.tops-hero h1{font-size:44px}}
+</style>
+</head>
+<body>
+<header><div class="logo">JUMPINKICKZZ</div><nav><a href="index.html">Home</a><a href="catalog.html">Catalog</a><a href="index.html#brands">Brands</a><a href="tops.html">Tops</a><a href="catalog.html#bottoms">Bottoms</a><a href="catalog.html">Accessories</a></nav><div class="header-icons"><a href="index.html" style="text-decoration:none;color:#111;font-weight:900">⌂</a></div></header>
+<section class="tops-hero"><div><div style="font-size:12px;letter-spacing:.25em;font-weight:900">JUMPINKICKZZ</div><h1>TOPS</h1><p>Choose a category to shop.</p></div></section>
+<main class="tops-wrap"><div class="tops-grid"><a class="tops-card" href="hoodies.html"><div class="icon">🧥</div><h2>Hoodies</h2><p>Shop hoodies and heavyweight fits.</p></a><a class="tops-card" href="shirts.html"><div class="icon">👕</div><h2>Shirts</h2><p>Shop tees and shirts.</p></a></div><p class="tops-note">More tops will be added as new products are added to the catalog.</p></main>
+<footer><h2>JUMPINKICKZZ</h2><p>Fresh kicks. Fresh fits.</p><p>© 2026 Jumpinkickzz</p></footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("page-transition");
+
+  document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", e => {
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto:")) return;
+      e.preventDefault();
+      document.body.style.opacity = "0";
+      document.body.style.transform = "translateY(6px)";
+      setTimeout(() => { window.location.href = href; }, 180);
+    });
+  });
+
+  document.addEventListener("click", e => {
+    const target = e.target.closest("a, button, .filter-btn, .product-card");
+    if (!target) return;
+    const ripple = document.createElement("span");
+    ripple.className = "click-ripple";
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top = e.clientY + "px";
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 520);
+  });
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  // Make all placeholder nav links visibly respond instead of silently doing nothing.
+  document.querySelectorAll('a[href="#"]').forEach(link=>link.addEventListener('click',e=>{
+    e.preventDefault();
+    const label=(link.textContent||'This section').trim();
+    const t=document.createElement('div'); t.className='toast-pop'; t.textContent=label+' is coming soon';
+    document.body.appendChild(t); requestAnimationFrame(()=>t.classList.add('show'));
+    setTimeout(()=>t.remove(),2200);
+  }));
+
+  // Extra click feedback without hijacking normal button behavior.
+  document.addEventListener('click',e=>{
+    const target=e.target.closest('button,a,.product-card,.catalog-card');
+    if(!target) return;
+    const wave=document.createElement('span'); wave.className='ripple-wave';
+    wave.style.left=e.clientX+'px'; wave.style.top=e.clientY+'px';
+    document.body.appendChild(wave); setTimeout(()=>wave.remove(),600);
+  });
+
+  // Gentle pointer tilt on cards for a more responsive feel.
+  document.querySelectorAll('.product-card,.catalog-card,.brand-card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(900px) rotateX(${(-y*2.2).toFixed(2)}deg) rotateY(${(x*2.2).toFixed(2)}deg) translateY(-7px)`;
+    });
+    card.addEventListener('pointerleave',()=>card.style.transform='');
+  });
+});
+</script>
+
+</body></html>

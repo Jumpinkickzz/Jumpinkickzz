@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/><title>Catalog | JUMPINKICKZZ</title><link href="style.css" rel="stylesheet"/><style>
+.catalog-hero{min-height:34vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#111,#2b2b2b);color:#fff}.catalog-hero h1{font-size:56px;margin:8px 0}.catalog-wrap{max-width:1280px;margin:0 auto;padding:55px 20px 80px}.catalog-title{text-align:center;margin-bottom:28px}.catalog-title span{font-size:12px;letter-spacing:.25em;font-weight:900;color:#777}.catalog-title h2{font-size:38px;margin:8px 0}.catalog-filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:32px}.catalog-filter{border:1px solid #ddd;background:#fff;border-radius:999px;padding:10px 16px;font-weight:900;cursor:pointer}.catalog-filter{position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .25s ease,background .25s ease}.catalog-filter.active,.catalog-filter:hover{background:#111;color:#fff;border-color:#111}.catalog-filter:active{transform:scale(.92)}.catalog-filter::after{content:"";position:absolute;inset:-80% 20%;background:rgba(255,255,255,.28);transform:translateX(-160%) rotate(20deg);transition:transform .5s ease}.catalog-filter:hover::after{transform:translateX(160%) rotate(20deg)}.catalog-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}.catalog-card{background:#fff;will-change:transform;animation:catalogEnter .55s cubic-bezier(.2,.8,.2,1) both;border:1px solid #e5e5e5;border-radius:18px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s}.catalog-card:hover{transform:translateY(-6px);box-shadow:0 20px 45px rgba(0,0,0,.12)}.catalog-image{height:310px;background:#f5f5f5;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}.catalog-image img{width:100%;height:100%;object-fit:contain;padding:18px;box-sizing:border-box}.catalog-image span{position:absolute;top:12px;left:12px;background:#111;color:#fff;padding:6px 9px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:1.2px}.catalog-info{padding:16px}.catalog-brand{font-size:10px;font-weight:900;letter-spacing:.16em;color:#777}.catalog-info h3{font-size:16px;margin:7px 0}.catalog-color{color:#666;font-size:12px;margin:0 0 10px}.catalog-info strong{display:block;font-size:17px;margin-bottom:13px}.catalog-info a{display:block;text-align:center;text-decoration:none;background:#111;color:#fff;border-radius:8px;padding:10px;font-size:11px;font-weight:900;letter-spacing:.06em}.back-home{display:inline-block;margin-top:25px;color:#111;font-weight:900;text-decoration:none}@keyframes catalogEnter{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}.catalog-card.is-hidden{opacity:0;transform:scale(.96)}.catalog-card.is-visible{animation:catalogEnter .45s cubic-bezier(.2,.8,.2,1) both}@media(max-width:1000px){.catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:720px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-image{height:240px}.catalog-hero h1{font-size:42px}}@media(max-width:480px){.catalog-grid{grid-template-columns:1fr}}
+.amiri-catalog-art{background:linear-gradient(145deg,#f8f8f8,#e7e7e7)!important}.amiri-catalog-art:after{content:"AMIRI";font-weight:900;letter-spacing:.2em;color:#222;font-size:24px}.amiri-catalog-art.indigo{background:linear-gradient(145deg,#dfe8f3,#aabbd0)!important}.amiri-catalog-art.white{background:linear-gradient(145deg,#fff,#ddd)!important}.amiri-catalog-art.waxed,.amiri-catalog-art.storm{background:linear-gradient(145deg,#222,#555)!important}.amiri-catalog-art.waxed:after,.amiri-catalog-art.storm:after{color:#fff}<style>.amiri-catalog-art.photo{background:#f5f5f5!important}.amiri-catalog-art.photo:after{display:none}.amiri-catalog-art.photo img{width:100%;height:100%;object-fit:contain;display:block;padding:12px;transition:transform .4s ease}.catalog-card:hover .amiri-catalog-art.photo img{transform:scale(1.05)}</style></head><body><header><div class="logo">JUMPINKICKZZ</div><nav><a href="index.html">Home</a><a href="catalog.html">Catalog</a><a href="index.html#brands">Brands</a><a href="tops.html">Tops</a><a href="catalog.html#bottoms" id="bottomsNav">Bottoms</a><a href="#">Accessories</a></nav><div class="header-icons"><a href="index.html" style="text-decoration:none">🛒</a></div></header><section class="catalog-hero">
+  <div class="hero-glow hero-glow-one"></div><div class="hero-glow hero-glow-two"></div>
+  <div class="catalog-hero-copy">
+    <div class="hero-eyebrow"><span></span> JUMPINKICKZZ / SHOP ALL <span></span></div>
+    <h1>THE<br><em>CATALOG</em></h1>
+    <p>Every piece. Every brand. One place.</p>
+    <div class="hero-stats"><b>27+</b><small>PRODUCTS</small><i></i><b>08</b><small>BRANDS</small><i></i><b>24/7</b><small>SHOP</small></div>
+  </div>
+  <div class="hero-product hero-product-left"><span>01</span><img src="images/catalog_balenciaga_0.jpg" alt="Balenciaga Runner"></div>
+  <div class="hero-product hero-product-right"><span>02</span><img src="images/sp5der_red.jpg" alt="Sp5der product"></div>
+  <div class="hero-product hero-product-bottom"><span>03</span><img src="images/purple_black_overspray.jpg" alt="Purple Brand jeans"></div>
+  <div class="hero-scroll"><span>SCROLL TO SHOP</span><b>↓</b></div>
+</section><main class="catalog-wrap"><div class="catalog-title"><span>SHOP ALL</span><h2>Full Catalog</h2><p class="catalog-live-count" id="catalogLiveCount">27 products</p></div><div class="catalog-filters"><button class="catalog-filter active" onclick="filterCatalog('ALL',this)">ALL</button><button class="catalog-filter" onclick="filterCatalog('BALENCIAGA',this)">BALENCIAGA</button><button class="catalog-filter" onclick="filterCatalog('DIOR',this)">DIOR</button><button class="catalog-filter" onclick="filterCatalog('SP5DER',this)">SP5DER</button><button class="catalog-filter" onclick="filterCatalog('PURPLE BRAND',this)">PURPLE BRAND</button><button class="catalog-filter" onclick="filterCatalog('HELLSTAR',this)">HELLSTAR</button><button class="catalog-filter" id="bottomsFilter" onclick="filterCatalog('BOTTOMS',this)">BOTTOMS</button><button class="catalog-filter" onclick="filterCatalog('MIKE AMIRI',this)">MIKE AMIRI</button></div><div class="catalog-tools-wrap">
+  <div class="catalog-tools-head">
+    <div><span class="tools-kicker">FIND YOUR FIT</span><h3>Search & Filter</h3></div>
+    <button class="clear-search" id="clearCatalogSearch" type="button">CLEAR ×</button>
+  </div>
+  <div class="catalog-tools">
+    <div class="catalog-search-shell">
+      <span class="search-icon">⌕</span>
+      <input autocomplete="off" class="catalog-search" id="catalogSearch" placeholder="Search products, brands, colors..." type="search"/>
+      <span class="search-status" id="searchStatus">27</span>
+    </div>
+    <div class="catalog-sort-shell">
+      <span class="sort-label">SORT BY</span>
+      <select class="catalog-sort" id="catalogSort">
+        <option value="featured">Featured</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option><option value="az">Name: A–Z</option>
+      </select>
+    </div>
+  </div>
+  <div class="quick-filters"><span>QUICK:</span><button type="button" data-quick="ALL">All</button><button type="button" data-quick="BOTTOMS">Bottoms</button><button type="button" data-quick="MIKE AMIRI">Amiri</button><button type="button" data-quick="BALENCIAGA">Balenciaga</button></div>
+</div><div class="catalog-grid"><article class="catalog-card" data-brand="BALENCIAGA" data-id="1">
+<div class="catalog-image"><img alt="Runner White / Multicolor" loading="lazy" src="images/catalog_balenciaga_0.jpg"/><span>BALENCIAGA</span></div>
+<div class="catalog-info"><div class="catalog-brand">BALENCIAGA</div><h3>Runner White / Multicolor</h3><p class="catalog-color">White / Multicolor</p><strong>$150.00</strong><a href="product.html?id=1">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="BALENCIAGA" data-id="2">
+<div class="catalog-image"><img alt="Runner White / Black" loading="lazy" src="images/catalog_balenciaga_1.jpg"/><span>BALENCIAGA</span></div>
+<div class="catalog-info"><div class="catalog-brand">BALENCIAGA</div><h3>Runner White / Black</h3><p class="catalog-color">White / Black</p><strong>$150.00</strong><a href="product.html?id=2">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="BALENCIAGA" data-id="3">
+<div class="catalog-image"><img alt="Runner White / Black / Silver" loading="lazy" src="images/catalog_balenciaga_2.jpg"/><span>BALENCIAGA</span></div>
+<div class="catalog-info"><div class="catalog-brand">BALENCIAGA</div><h3>Runner White / Black / Silver</h3><p class="catalog-color">Grey / Black / Silver</p><strong>$150.00</strong><a href="product.html?id=3">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="BALENCIAGA" data-id="4">
+<div class="catalog-image"><img alt="Runner White / Black / Silver" loading="lazy" src="images/catalog_balenciaga_3.jpg"/><span>BALENCIAGA</span></div>
+<div class="catalog-info"><div class="catalog-brand">BALENCIAGA</div><h3>Runner White / Black / Silver</h3><p class="catalog-color">Grey / Black / Silver</p><strong>$150.00</strong><a href="product.html?id=4">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="DIOR" data-id="5">
+<div class="catalog-image"><img alt="Dior B30 White / Blue / Grey" loading="lazy" src="images/catalog_dior_0.webp"/><span>DIOR</span></div>
+<div class="catalog-info"><div class="catalog-brand">DIOR</div><h3>Dior B30 White / Blue / Grey</h3><p class="catalog-color">White / Blue / Grey</p><strong>$120.00</strong><a href="product.html?id=5">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="DIOR" data-id="6">
+<div class="catalog-image"><img alt="Dior B30 Black / White" loading="lazy" src="images/catalog_dior_1.jpg"/><span>DIOR</span></div>
+<div class="catalog-info"><div class="catalog-brand">DIOR</div><h3>Dior B30 Black / White</h3><p class="catalog-color">Black / White</p><strong>$120.00</strong><a href="product.html?id=6">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="DIOR" data-id="7">
+<div class="catalog-image"><img alt="Dior B30 Grey / White" loading="lazy" src="images/catalog_dior_2.jpg"/><span>DIOR</span></div>
+<div class="catalog-info"><div class="catalog-brand">DIOR</div><h3>Dior B30 Grey / White</h3><p class="catalog-color">Grey / White</p><strong>$120.00</strong><a href="product.html?id=7">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="DIOR" data-id="8">
+<div class="catalog-image"><img alt="Dior B30 White" loading="lazy" src="images/catalog_dior_3.jpg"/><span>DIOR</span></div>
+<div class="catalog-info"><div class="catalog-brand">DIOR</div><h3>Dior B30 White</h3><p class="catalog-color">White</p><strong>$120.00</strong><a href="product.html?id=8">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="SP5DER" data-id="9">
+<div class="catalog-image"><img alt="Never Mind the Punk Sp5der Hoodie" loading="lazy" src="images/sp5der_black_pink.jpg"/><span>SP5DER</span></div>
+<div class="catalog-info"><div class="catalog-brand">SP5DER</div><h3>Never Mind the Punk Sp5der Hoodie</h3><p class="catalog-color">Black / Pink</p><strong>$75.00</strong><a href="product.html?id=9">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="SP5DER" data-id="10">
+<div class="catalog-image"><img alt='Sp5der Hoodie "TC Blue"' loading="lazy" src="images/sp5der_blue.jpg"/><span>SP5DER</span></div>
+<div class="catalog-info"><div class="catalog-brand">SP5DER</div><h3>Sp5der Hoodie "TC Blue"</h3><p class="catalog-color">Blue / Yellow</p><strong>$75.00</strong><a href="product.html?id=10">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="SP5DER" data-id="11">
+<div class="catalog-image"><img alt='Sp5der Web Hoodie "Sky Blue"' loading="lazy" src="images/sp5der_skyblue.jpg"/><span>SP5DER</span></div>
+<div class="catalog-info"><div class="catalog-brand">SP5DER</div><h3>Sp5der Web Hoodie "Sky Blue"</h3><p class="catalog-color">Sky Blue / White</p><strong>$75.00</strong><a href="product.html?id=11">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="SP5DER" data-id="12">
+<div class="catalog-image"><img alt="World 555 Hoodie – Red" loading="lazy" src="images/sp5der_red.jpg"/><span>SP5DER</span></div>
+<div class="catalog-info"><div class="catalog-brand">SP5DER</div><h3>World 555 Hoodie – Red</h3><p class="catalog-color">Red</p><strong>$75.00</strong><a href="product.html?id=12">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="SP5DER" data-id="13">
+<div class="catalog-image"><img alt='Sp5der Punk V2 Rhinestone Hoodie "Bright Green"' loading="lazy" src="images/sp5der_bright_green.jpg"/><span>SP5DER</span></div>
+<div class="catalog-info"><div class="catalog-brand">SP5DER</div><h3>Sp5der Punk V2 Rhinestone Hoodie "Bright Green"</h3><p class="catalog-color">Bright Green / Black / White</p><strong>$75.00</strong><a href="product.html?id=13">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="PURPLE BRAND" data-id="14">
+<div class="catalog-image"><img alt="P001 Black Resin 3/D" loading="lazy" src="images/purple_black_resin_3d.jpg"/><span>PURPLE BRAND</span></div>
+<div class="catalog-info"><div class="catalog-brand">PURPLE BRAND</div><h3>P001 Black Resin 3/D</h3><p class="catalog-color">Black</p><strong>$188.00</strong><a href="product.html?id=14">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="PURPLE BRAND" data-id="15">
+<div class="catalog-image"><img alt="P001 Black Raw" loading="lazy" src="images/purple_black_raw.jpg"/><span>PURPLE BRAND</span></div>
+<div class="catalog-info"><div class="catalog-brand">PURPLE BRAND</div><h3>P001 Black Raw</h3><p class="catalog-color">Black</p><strong>$190.00</strong><a href="product.html?id=15">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="PURPLE BRAND" data-id="16">
+<div class="catalog-image"><img alt="P001 Black Overspray" loading="lazy" src="images/purple_black_overspray.jpg"/><span>PURPLE BRAND</span></div>
+<div class="catalog-info"><div class="catalog-brand">PURPLE BRAND</div><h3>P001 Black Overspray</h3><p class="catalog-color">Black</p><strong>$118.35</strong><a href="product.html?id=16">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="PURPLE BRAND" data-id="17">
+<div class="catalog-image"><img alt="P001 Worn Grey Knee Slit" loading="lazy" src="images/purple_worn_grey_knee_slit.jpg"/><span>PURPLE BRAND</span></div>
+<div class="catalog-info"><div class="catalog-brand">PURPLE BRAND</div><h3>P001 Worn Grey Knee Slit</h3><p class="catalog-color">Grey</p><strong>$132.50</strong><a href="product.html?id=17">VIEW PRODUCT →</a></div>
+</article><article class="catalog-card" data-brand="PURPLE BRAND" data-id="18">
+<div class="catalog-image"><img alt="P001 Light Dirty Wax" loading="lazy" src="images/purple_light_dirty_wax.jpg"/><span>PURPLE BRAND</span></div>
+<div class="catalog-info"><div class="catalog-brand">PURPLE BRAND</div><h3>P001 Light Dirty Wax</h3><p class="catalog-color">Light Indigo</p><strong>$198.00</strong><a href="product.html?id=18">VIEW PRODUCT →</a>
+<article class="catalog-card" data-brand="HELLSTAR" data-id="19"><div class="catalog-image"><img alt="Classic Tribal Print T-Shirt Black" loading="lazy" src="images/hellstar_classic_black.webp"/><span>HELLSTAR</span></div><div class="catalog-info"><div class="catalog-brand">HELLSTAR</div><h3>Classic Tribal Print T-Shirt</h3><p class="catalog-color">Black</p><strong>$75.00</strong><a href="product.html?id=19">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="HELLSTAR" data-id="20"><div class="catalog-image"><img alt="Hellstar Sports Core Gel Logo T-Shirt Black/Red" loading="lazy" src="images/hellstar_user_1.webp"/><span>HELLSTAR</span></div><div class="catalog-info"><div class="catalog-brand">HELLSTAR</div><h3>Hellstar Sports Core Gel Logo T-Shirt</h3><p class="catalog-color">Black/Red</p><strong>$75.00</strong><a href="product.html?id=20">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="HELLSTAR" data-id="21"><div class="catalog-image"><img alt="H3star T-Shirt Black" loading="lazy" src="images/hellstar_user_3.webp"/><span>HELLSTAR</span></div><div class="catalog-info"><div class="catalog-brand">HELLSTAR</div><h3>H3star T-Shirt</h3><p class="catalog-color">Black</p><strong>$75.00</strong><a href="product.html?id=21">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="HELLSTAR" data-id="22"><div class="catalog-image"><img alt="Hellstar Sports Core Gel Logo T-Shirt White/Black" loading="lazy" src="images/hellstar_sports_white_black_back.webp"/><span>HELLSTAR</span></div><div class="catalog-info"><div class="catalog-brand">HELLSTAR</div><h3>Hellstar Sports Core Gel Logo T-Shirt</h3><p class="catalog-color">White/Black</p><strong>$75.00</strong><a href="product.html?id=22">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="HELLSTAR" data-id="23"><div class="catalog-image"><img alt="Jesus Eyes T-Shirt White" loading="lazy" src="images/hellstar_user_5.webp"/><span>HELLSTAR</span></div><div class="catalog-info"><div class="catalog-brand">HELLSTAR</div><h3>Jesus Eyes T-Shirt</h3><p class="catalog-color">White</p><strong>$75.00</strong><a href="product.html?id=23">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="MIKE AMIRI" data-category="BOTTOMS" data-id="24"><div class="catalog-image amiri-catalog-art photo"><img alt="AMIRI MX1 Black OD" loading="lazy" src="images/amiri_mx1_black_od.webp"/><span>MIKE AMIRI</span></div><div class="catalog-info"><div class="catalog-brand">MIKE AMIRI</div><h3>MX1</h3><p class="catalog-color">Black OD</p><strong>$150.00</strong><a href="product.html?id=24">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="MIKE AMIRI" data-category="BOTTOMS" data-id="25"><div class="catalog-image amiri-catalog-art photo"><img alt="AMIRI MX1 Jean White" loading="lazy" src="images/amiri_mx1_white.webp"/><span>MIKE AMIRI</span></div><div class="catalog-info"><div class="catalog-brand">MIKE AMIRI</div><h3>MX1 Jean</h3><p class="catalog-color">White</p><strong>$150.00</strong><a href="product.html?id=25">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="MIKE AMIRI" data-category="BOTTOMS" data-id="26"><div class="catalog-image amiri-catalog-art indigo"><span>MIKE AMIRI</span></div><div class="catalog-info"><div class="catalog-brand">MIKE AMIRI</div><h3>MX1 Jean</h3><p class="catalog-color">Rich Indigo</p><strong>$150.00</strong><a href="product.html?id=26">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="MIKE AMIRI" data-category="BOTTOMS" data-id="27"><div class="catalog-image amiri-catalog-art waxed"><span>MIKE AMIRI</span></div><div class="catalog-info"><div class="catalog-brand">MIKE AMIRI</div><h3>Waxed MX1 Jean</h3><p class="catalog-color">Waxed Dusty Black</p><strong>$150.00</strong><a href="product.html?id=27">VIEW PRODUCT →</a></div></article><article class="catalog-card" data-brand="MIKE AMIRI" data-category="BOTTOMS" data-id="28"><div class="catalog-image amiri-catalog-art storm"><span>MIKE AMIRI</span></div><div class="catalog-info"><div class="catalog-brand">MIKE AMIRI</div><h3>MX1 Jean</h3><p class="catalog-color">Storm Black</p><strong>$150.00</strong><a href="product.html?id=28">VIEW PRODUCT →</a></div></article></div>
+</article></div><a class="back-home" href="index.html">← Back Home</a></main><footer><h2>JUMPINKICKZZ</h2><p>Fresh kicks. Fresh fits.</p><p>© 2026 Jumpinkickzz</p></footer>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  if(location.hash==="#bottoms"){
+    const b=document.getElementById("bottomsFilter");
+    if(b) filterCatalog("BOTTOMS",b);
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("page-transition");
+
+  document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", e => {
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto:")) return;
+      e.preventDefault();
+      document.body.style.opacity = "0";
+      document.body.style.transform = "translateY(6px)";
+      setTimeout(() => { window.location.href = href; }, 180);
+    });
+  });
+
+  document.addEventListener("click", e => {
+    const target = e.target.closest("a, button, .filter-btn, .product-card");
+    if (!target) return;
+    const ripple = document.createElement("span");
+    ripple.className = "click-ripple";
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top = e.clientY + "px";
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 520);
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  // Make all placeholder nav links visibly respond instead of silently doing nothing.
+  document.querySelectorAll('a[href="#"]').forEach(link=>link.addEventListener('click',e=>{
+    e.preventDefault();
+    const label=(link.textContent||'This section').trim();
+    const t=document.createElement('div'); t.className='toast-pop'; t.textContent=label+' is coming soon';
+    document.body.appendChild(t); requestAnimationFrame(()=>t.classList.add('show'));
+    setTimeout(()=>t.remove(),2200);
+  }));
+
+  // Extra click feedback without hijacking normal button behavior.
+  document.addEventListener('click',e=>{
+    const target=e.target.closest('button,a,.product-card,.catalog-card');
+    if(!target) return;
+    const wave=document.createElement('span'); wave.className='ripple-wave';
+    wave.style.left=e.clientX+'px'; wave.style.top=e.clientY+'px';
+    document.body.appendChild(wave); setTimeout(()=>wave.remove(),600);
+  });
+
+  // Gentle pointer tilt on cards for a more responsive feel.
+  document.querySelectorAll('.product-card,.catalog-card,.brand-card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(900px) rotateX(${(-y*2.2).toFixed(2)}deg) rotateY(${(x*2.2).toFixed(2)}deg) translateY(-7px)`;
+    });
+    card.addEventListener('pointerleave',()=>card.style.transform='');
+  });
+});
+</script>
+<script>
+const catalogCards=[...document.querySelectorAll('.catalog-card')];
+let activeCatalogFilter='ALL';
+function applyCatalog(){
+  const q=(document.getElementById('catalogSearch')?.value||'').trim().toLowerCase();
+  const sort=document.getElementById('catalogSort')?.value||'featured';
+  const grid=document.querySelector('.catalog-grid');
+  const data=catalogCards.map(card=>({card,text:(card.innerText||'').toLowerCase(),price:parseFloat((card.querySelector('strong')?.textContent||'').replace(/[^0-9.]/g,''))||0,name:card.querySelector('h3')?.textContent||'',brand:card.dataset.brand||''}));
+  let rows=data.filter(x=>activeCatalogFilter==='ALL'||(activeCatalogFilter==='BOTTOMS'?(x.brand==='PURPLE BRAND'||x.brand==='MIKE AMIRI'):x.brand===activeCatalogFilter));
+  if(q) rows=rows.filter(x=>x.text.includes(q));
+  if(sort==='low') rows.sort((a,b)=>a.price-b.price); else if(sort==='high') rows.sort((a,b)=>b.price-a.price); else if(sort==='az') rows.sort((a,b)=>a.name.localeCompare(b.name));
+  rows.forEach((x,i)=>{grid.appendChild(x.card); x.card.style.display=''; x.card.classList.remove('is-hidden'); x.card.classList.add('is-visible'); x.card.style.animationDelay=(Math.min(i,8)*35)+'ms';});
+  data.filter(x=>!rows.includes(x)).forEach(x=>{x.card.style.display='none';x.card.classList.add('is-hidden');});
+  let empty=document.getElementById('catalogEmpty'); const countEl=document.getElementById('catalogLiveCount'); if(countEl) countEl.textContent=`${rows.length} product${rows.length===1?'':'s'}`; const status=document.getElementById('searchStatus'); if(status) status.textContent=rows.length; const clear=document.getElementById('clearCatalogSearch'); if(clear) clear.classList.toggle('visible',!!q);
+  if(!rows.length){ if(!empty){empty=document.createElement('div');empty.id='catalogEmpty';empty.className='search-empty';grid.appendChild(empty);} empty.textContent=q?`No products found for “${q}”.`:'No products in this category.'; }
+  else if(empty) empty.remove();
+}
+function filterCatalog(brand,btn){activeCatalogFilter=brand;document.querySelectorAll('.catalog-filter').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');applyCatalog();}
+document.addEventListener('DOMContentLoaded',()=>{
+  const search=document.getElementById('catalogSearch');
+  search?.addEventListener('input',applyCatalog);
+  document.getElementById('catalogSort')?.addEventListener('change',applyCatalog);
+  document.getElementById('clearCatalogSearch')?.addEventListener('click',()=>{ if(search){search.value='';search.focus();} applyCatalog(); });
+  document.querySelectorAll('[data-quick]').forEach(btn=>btn.addEventListener('click',()=>{
+    const value=btn.dataset.quick;
+    const filterBtn=[...document.querySelectorAll('.catalog-filter')].find(x=>x.textContent.trim()===value);
+    filterCatalog(value,filterBtn||null);
+  }));
+  if(location.hash==='#bottoms'){const b=document.getElementById('bottomsFilter');filterCatalog('BOTTOMS',b);} else applyCatalog();
+});
+</script></body></html>
